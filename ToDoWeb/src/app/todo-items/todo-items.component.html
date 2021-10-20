@@ -1,0 +1,20 @@
+<section class="todoapp">
+    <header class="header">
+      <h1>Todos App</h1>
+      <input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodo.itemName" (keyup.enter)="addTodo()">
+    </header>
+    <section class="main" *ngIf="todoDataService.todos.length > 0">
+      <ul class="todo-list">
+        <li *ngFor="let todo of todoDataService.todos" [class.completed]="todo.itemStatus">
+          <div class="view">
+            <input class="toggle" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.itemStatus">
+            <label>{{todo.itemName}}</label>
+            <button class="destroy" (click)="removeTodo(todo)"></button>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <footer class="footer" *ngIf="todoDataService.todos.length > 0">
+      <span class="todo-count"><strong>{{todoDataService.todos.length}}</strong> {{todoDataService.todos.length == 1 ? 'item' : 'items'}} left</span>
+    </footer>
+  </section>
